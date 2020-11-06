@@ -1,28 +1,33 @@
 "use strict";
 
-
-
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
  */
 const { MoleculerClientError } = require("moleculer").Errors;
-const DbService = require("../mixins/db.mixin");
+//const DbService = require('"../mixins/db.mixin"');
+const DbService = require("moleculer-db");
+const MongooseAdapter = require("moleculer-db-adapter-mongoose");
+const User = require("../models/user.model");
+const mongoose = require("mongoose");
 
 // USER.service.js
 module.exports = {
 	name: "users",
-	mixins: [ 
-		DbService ("users"), 
-	  ], 
+	// mixins: [ 
+	// 	DbService ("users"), 
+	//   ], 
+	mixin: [DbService],
+	adapter: new MongooseAdapter(process.env.MONGO_URI || "mongodb://localhost/henrybank", { useNewUrlParser: true, useUnifiedTopology: true }),
+    model: User,
 	  
 	settings: {
 	/** Public fields */
 		fields: ["_id", "name", "password"],
 	/** Validator schema for entity */
-		entityValidator: {
-		 name: { type: "string"},
-		 password: { type: "string"},
-		}
+		// entityValidator: {
+		//  name: { type: "string"},
+		//  password: { type: "string"},
+		// }
 	 },
 
 	 afterConnected() {
@@ -67,10 +72,18 @@ module.exports = {
 
 		list: {
 			async handler(){
-				const users = await this.adapter.find();
-				return users
+				 const users = await User.find({});
+				 return users
 			}
-			
+		},
+
+		
+		remove: {
+			async handler(){
+				let id = ctx.params;
+				// const users = await this.adapter.remove({ _id: id }));
+				return 'Hola remove'
+			}
 		},
 		
 		create: {
@@ -79,10 +92,10 @@ module.exports = {
 			// },
 			async handler(ctx) {
 				let entity = ctx.params;
-				await this.validateEntity(entity);
+				//await this.validateEntity(entity);
 				if (entity.name) {
 					//return 'Hola POST'
-					const found = await this.adapter.findOne({ name: entity.name });
+					const found = await User.findOne({ name: entity.name });
 					if (found)
 						return Promise.reject(
 							new MoleculerClientError("Name exists!", 422, "Name exists!", [{ field: "name", message: "Name exists"}])
@@ -92,10 +105,18 @@ module.exports = {
 				entity.password = entity.password || "";
 		 		entity.name = entity.name || ""
 
-				const doc = await this.adapter.insert(entity);
-				const user = await this.transformDocuments(ctx, {}, doc);
-				return this.entityChanged("created", user, ctx).then(() => user);
+				const doc = await User.create(entity);
+				//const user = await this.transformDocuments(ctx, {}, doc);
+				return doc
 			    }
 			},
-		}
+		},
+
+	created() {
+		mongoose.connect("mongodb://localhost/henrybank", { useNewUrlParser: true, useUnifiedTopology: true })
+		.then(() => console.log('DB Connected!'))
+			.catch(err => {
+		console.log(Error, err.message);
+		});
+	},
 }

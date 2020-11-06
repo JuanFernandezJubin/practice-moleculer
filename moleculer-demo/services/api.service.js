@@ -54,7 +54,8 @@ module.exports = {
 					"GET /nameUser": "users.nameUser",
 					"POST /createdUser" : "users.createdUser",
 					"POST /users": "users.create",
-					"GET /users" : "users.list"
+					"GET /users" : "users.list",
+					"DELETE /users" : "users.remove"
 				},
 
 				/** 
