@@ -1,7 +1,6 @@
 "use strict";
 
-const ApiGateway = require("moleculer-web");
-
+const ApiGateway = require("moleculer-web");  
 /**
  * @typedef {import('moleculer').Context} Context Moleculer's Context
  * @typedef {import('http').IncomingMessage} IncomingRequest Incoming HTTP Request
