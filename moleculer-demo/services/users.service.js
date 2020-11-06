@@ -79,10 +79,21 @@ module.exports = {
 
 		
 		remove: {
-			async handler(){
-				let id = ctx.params;
+			async handler(ctx){
+				let {id} = ctx.params;
 				// const users = await this.adapter.remove({ _id: id }));
-				return 'Hola remove'
+				const userDeleted = await User.findByIdAndRemove({ _id: id })
+				console.log(id)
+				return userDeleted
+			}
+		},
+
+		update: {
+			async handler(ctx){
+				let {id, name, password} = ctx.params;
+
+				const userUpdated = await User.findByIdAndUpdate({ _id: id }, {name, password})
+				return userUpdated
 			}
 		},
 		
