@@ -4,90 +4,98 @@
  * @typedef {import('moleculer').Context} Context Moleculer's Context
  */
 
-module.exports = {
-	name: "greeter",
 
-	/**
-	 * Settings
-	 */
-	settings: {
+ module.exports = {
+name: "greeter",
+// 	actions: {
+//     getUsers(ctx) {
+//          return 'Hola User'; 
+//      },
 
-	},
+// }	
+	// name: "greeter",
 
-	/**
-	 * Dependencies
-	 */
-	dependencies: [],
+	// /**
+	//  * Settings
+	//  */
+	// settings: {
 
-	/**
-	 * Actions
-	 */
-	actions: {
+	// },
 
-		/**
-		 * Say a 'Hello' action.
-		 *
-		 * @returns
-		 */
-		hello: {
-			rest: {
-				method: "GET",
-				path: "/hello"
-			},
-			async handler() {
-				return "Hello Moleculer";
-			}
-		},
+	// /**
+	//  * Dependencies
+	//  */
+	// dependencies: [],
 
-		/**
-		 * Welcome, a username
-		 *
-		 * @param {String} name - User name
-		 */
-		welcome: {
-			rest: "/welcome",
-			params: {
-				name: "string"
-			},
-			/** @param {Context} ctx  */
-			async handler(ctx) {
-				return `Welcome, ${ctx.params.name}`;
-			}
-		}
-	},
+	// /**
+	//  * Actions
+	//  */
+	// actions: {
 
-	/**
-	 * Events
-	 */
-	events: {
+	// 	/**
+	// 	 * Say a 'Hello' action.
+	// 	 *
+	// 	 * @returns
+	// 	 */
+	// 	hello: {
+	// 		rest: {
+	// 			method: "GET",
+	// 			path: "/hello"
+	// 		},
+	// 		async handler() {
+	// 			return "Hello Moleculer";
+	// 		}
+	// 	},
 
-	},
+	// 	/**
+	// 	 * Welcome, a username
+	// 	 *
+	// 	 * @param {String} name - User name
+	// 	 */
+	// 	welcome: {
+	// 		rest: "/welcome",
+	// 		params: {
+	// 			name: "string"
+	// 		},
+	// 		/** @param {Context} ctx  */
+	// 		async handler(ctx) {
+	// 			return `Welcome, ${ctx.params.name}`;
+	// 		}
+	// 	}
+	// },
 
-	/**
-	 * Methods
-	 */
-	methods: {
+	// /**
+	//  * Events
+	//  */
+	// events: {
 
-	},
+	// },
 
-	/**
-	 * Service created lifecycle event handler
-	 */
-	created() {
+	// /**
+	//  * Methods
+	//  */
+	// methods: {
 
-	},
+	// },
 
-	/**
-	 * Service started lifecycle event handler
-	 */
-	async started() {
+	// /**
+	//  * Service created lifecycle event handler
+	//  */
+	// created() {
 
-	},
+	// },
 
-	/**
-	 * Service stopped lifecycle event handler
-	 */
-	async stopped() {
+	// /**
+	//  * Service started lifecycle event handler
+	//  */
+	// async started() {
 
-	}
+	// },
+
+	// /**
+	//  * Service stopped lifecycle event handler
+	//  */
+	// async stopped() {
+
+	// }
 };

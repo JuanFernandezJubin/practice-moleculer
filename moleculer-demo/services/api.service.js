@@ -27,9 +27,10 @@ module.exports = {
 			{
 				path: "/api",
 
-				whitelist: [
-					"**"
-				],
+				// whitelist: [
+				// 	"**"
+				// ],
+
 
 				// Route-level Express middlewares. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Middlewares
 				use: [],
@@ -48,7 +49,14 @@ module.exports = {
 				autoAliases: true,
 
 				aliases: {
-
+					//Users
+					"GET /getUsers": "users.getUser",
+					"GET /nameUser": "users.nameUser",
+					"POST /createdUser" : "users.createdUser",
+					"POST /users": "users.create",
+					"GET /users" : "users.list",
+					"DELETE /users/:id" : "users.remove",
+					"PUT /users/:id" : "users.update"
 				},
 
 				/** 
